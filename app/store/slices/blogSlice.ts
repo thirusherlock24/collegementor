@@ -1,6 +1,6 @@
 // blogSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { fetchLandingData } from "../thunks/blogThunk";
+import  blogThunk  from "../thunks/blogThunk";
 
 // Define the initial state and its type
 type HeaderCategoryProps = {
@@ -34,15 +34,15 @@ const blogSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchLandingData.pending, (state) => {
+      .addCase(blogThunk.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchLandingData.rejected, (state, action) => {
+      .addCase(blogThunk.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || "Failed to fetch blog landing data";
       })
-      .addCase(fetchLandingData.fulfilled, (state, action) => {
+      .addCase(blogThunk.fulfilled, (state, action) => {
         state.loading = false;
         state.landingData = action.payload;
       });

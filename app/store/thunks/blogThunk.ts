@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const fetchLandingData = createAsyncThunk(
+ const blogThunk = createAsyncThunk(
   "blogSlice/fetchLandingData",
   async () => {
     try {
@@ -15,3 +15,4 @@ export const fetchLandingData = createAsyncThunk(
     }
   }
 );
+export default blogThunk;
