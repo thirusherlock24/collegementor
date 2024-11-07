@@ -4,7 +4,7 @@ import { View, StyleSheet, ActivityIndicator, Text } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../../store/nativestore';
 import ArticlesAndLatestNews from './ArticlesAndLatestNews';
-import { fetchLandingData } from '../../../store/thunks/blogThunk'; // Adjust this path as needed
+import  blogThunk  from '../../../store/thunks/blogThunk'; // Adjust this path as needed
 
 const BlogsAndArticlesMain: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -14,7 +14,7 @@ const BlogsAndArticlesMain: React.FC = () => {
   );
 
   useEffect(() => {
-    dispatch(fetchLandingData());
+    dispatch(blogThunk());
   }, [dispatch]);
 
   if (loading) {

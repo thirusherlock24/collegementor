@@ -1,13 +1,3 @@
-import { registerRootComponent } from 'expo';
-import React from 'react';
-import { Provider } from 'react-redux';
+// App/index.tsx
 import App from './App';
-import store from './store/nativestore'; // Import the simplified store
-
-const Main = () => (
-  <Provider store={store}>
-    <App />
-  </Provider>
-);
-
-registerRootComponent(Main);
+export default App;
