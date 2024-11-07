@@ -2,21 +2,25 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { BlogsAndArticlesMain } from './screens/blogs';
+import { BlogsAndArticlesMain,BlogDetailScreen } from './screens/blogs';
+import { createStackNavigator } from '@react-navigation/stack';
+import { RootStackParamList } from './types'; 
 
 export type RootDrawerParamList = {
   blogs: undefined;
 };
 
-const Drawer = createDrawerNavigator<RootDrawerParamList>();
+
+const Stack = createStackNavigator<RootStackParamList>(); //
 
 const Navigation: React.FC = () => {
   return (
     <NavigationContainer independent={true}>
-      <Drawer.Navigator>
-        <Drawer.Screen name="blogs" component={BlogsAndArticlesMain} options={{ title: 'Blogs' }} />
-      </Drawer.Navigator>
-    </NavigationContainer>
+    <Stack.Navigator>
+      <Stack.Screen name="BlogsMain" component={BlogsAndArticlesMain} options={{ title: 'Blogs' }} />
+      <Stack.Screen name="BlogDetail" component={BlogDetailScreen} options={{ title: 'Blog Detail' }} />
+    </Stack.Navigator>
+  </NavigationContainer>
   );
 };
 

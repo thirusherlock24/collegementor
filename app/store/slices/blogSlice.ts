@@ -1,12 +1,13 @@
 // blogSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import  blogThunk  from "../thunks/blogThunk";
+import { blogThunk, fetchAllSections } from "../thunks/blogThunk";
 
 // Define the initial state and its type
 type HeaderCategoryProps = {
   category: string;
   subCategory: string;
   landingData: any;
+  allSectionsData: any;
   loading: boolean;
   error: string | null;
 };
@@ -15,6 +16,7 @@ const initialState: HeaderCategoryProps = {
   category: "",
   subCategory: "",
   landingData: null,
+  allSectionsData: null,
   loading: false,
   error: null,
 };
@@ -33,6 +35,7 @@ const blogSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    // Handling blogThunk for fetching landing data
     builder
       .addCase(blogThunk.pending, (state) => {
         state.loading = true;
@@ -45,6 +48,21 @@ const blogSlice = createSlice({
       .addCase(blogThunk.fulfilled, (state, action) => {
         state.loading = false;
         state.landingData = action.payload;
+      });
+
+    // Handling fetchAllSections for fetching all sections data
+    builder
+      .addCase(fetchAllSections.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchAllSections.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Failed to fetch all sections data";
+      })
+      .addCase(fetchAllSections.fulfilled, (state, action) => {
+        state.loading = false;
+        state.allSectionsData = action.payload;
       });
   },
 });
